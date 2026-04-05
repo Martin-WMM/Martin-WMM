@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Martin Wang | Personal Universe</title>
+    <meta
+      name="description"
+      content="Dark and modern personal homepage of Martin Wang with education, career, hobbies, gallery, and projects."
+    />
+    <style>
+      html,
+      body {
+        background: #070b14;
+        color: #e2e8f0;
+        margin: 0;
+      }
+
+      .loading-overlay {
+        align-items: center;
+        background: radial-gradient(60rem 35rem at 50% -10%, rgba(122, 168, 255, 0.26), transparent 52%), #070b14;
+        display: flex;
+        inset: 0;
+        justify-content: center;
+        position: fixed;
+        transition: opacity 220ms ease, visibility 220ms ease;
+        z-index: 999;
+      }
+
+      .loading-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .loading-sketch {
+        border: 1px solid rgba(148, 163, 184, 0.24);
+        border-radius: 22px;
+        display: grid;
+        gap: 10px;
+        padding: 16px;
+        width: min(680px, calc(100% - 32px));
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.76), rgba(2, 6, 23, 0.8));
+        box-shadow: 0 24px 60px rgba(2, 6, 23, 0.6);
+      }
+
+      .sketch-row {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+      }
+
+      .sketch-block {
+        animation: sketchPulse 1.35s ease-in-out infinite;
+        border: 1px solid rgba(148, 163, 184, 0.26);
+        border-radius: 10px;
+        min-height: 18px;
+        background: linear-gradient(
+          110deg,
+          rgba(15, 23, 42, 0.3) 0%,
+          rgba(122, 168, 255, 0.16) 38%,
+          rgba(52, 245, 197, 0.16) 52%,
+          rgba(15, 23, 42, 0.3) 100%
+        );
+        background-size: 220% 100%;
+      }
+
+      .sketch-pill {
+        grid-column: span 3;
+      }
+
+      .sketch-title {
+        grid-column: span 8;
+        min-height: 34px;
+      }
+
+      .sketch-sub {
+        grid-column: span 5;
+        min-height: 22px;
+      }
+
+      .sketch-card {
+        grid-column: span 4;
+        min-height: 100px;
+      }
+
+      @media (max-width: 640px) {
+        .sketch-pill {
+          grid-column: span 6;
+        }
+
+        .sketch-title,
+        .sketch-sub,
+        .sketch-card {
+          grid-column: span 12;
+        }
+      }
+
+      @keyframes sketchPulse {
+        0%,
+        100% {
+          opacity: 0.45;
+          background-position: 0% 0;
+        }
+        50% {
+          opacity: 1;
+          background-position: 100% 0;
+        }
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['"Sora"', 'sans-serif'],
+              body: ['"Manrope"', 'sans-serif'],
+            },
+            colors: {
+              carbon: '#070b14',
+              neon: '#34f5c5',
+              lava: '#ff7849',
+              starlight: '#7aa8ff',
+            },
+            boxShadow: {
+              glow: '0 0 0 1px rgba(122,168,255,.25), 0 12px 38px rgba(52,245,197,.18)',
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <script type="module" src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background:
+          radial-gradient(50rem 30rem at -10% -10%, rgba(122, 168, 255, 0.22), transparent 50%),
+          radial-gradient(50rem 30rem at 110% 10%, rgba(52, 245, 197, 0.16), transparent 50%),
+          radial-gradient(50rem 30rem at 50% 120%, rgba(255, 120, 73, 0.14), transparent 55%),
+          #070b14;
+      }
+
+      .glass {
+        backdrop-filter: blur(14px);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+      }
+
+      .shine {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .shine::before {
+        content: '';
+        position: absolute;
+        inset: -120% auto auto -20%;
+        width: 45%;
+        height: 320%;
+        transform: rotate(20deg);
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+        animation: sweep 7s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      .btn-soft {
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        box-shadow: 0 6px 18px rgba(2, 6, 23, 0.35);
+        transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+      }
+
+      .btn-soft:hover {
+        filter: brightness(1.06);
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px rgba(2, 6, 23, 0.42);
+      }
+
+      .btn-soft-neon {
+        background: linear-gradient(135deg, rgba(52, 245, 197, 0.26), rgba(122, 168, 255, 0.24));
+      }
+
+      .btn-soft-starlight {
+        background: linear-gradient(135deg, rgba(122, 168, 255, 0.25), rgba(167, 139, 250, 0.2));
+      }
+
+      .btn-soft-lava {
+        background: linear-gradient(135deg, rgba(255, 120, 73, 0.26), rgba(251, 191, 36, 0.2));
+      }
+
+      .soft-frame {
+        border: 1px solid transparent;
+        box-shadow: inset 0 0 0 1px rgba(122, 168, 255, 0.16), 0 12px 28px rgba(2, 6, 23, 0.34);
+      }
+
+      .soft-card {
+        border: 1px solid transparent;
+        box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.16);
+      }
+
+      .soft-card-strong {
+        border: 1px solid transparent;
+        box-shadow: inset 0 0 0 1px rgba(122, 168, 255, 0.2), 0 10px 24px rgba(2, 6, 23, 0.28);
+      }
+
+      .section-shell {
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .section-shell {
+          padding: 2rem;
+        }
+      }
+
+      .panel-surface {
+        background: linear-gradient(145deg, rgba(15, 23, 42, 0.5), rgba(2, 6, 23, 0.62));
+      }
+
+      .card-accent-starlight {
+        box-shadow: inset 0 0 0 1px rgba(122, 168, 255, 0.32);
+      }
+
+      .card-accent-lava {
+        box-shadow: inset 0 0 0 1px rgba(255, 120, 73, 0.3);
+      }
+
+      .nav-pill {
+        border: 1px solid transparent;
+        box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.14);
+        transition: color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+      }
+
+      .nav-pill:hover {
+        background: linear-gradient(135deg, rgba(122, 168, 255, 0.18), rgba(52, 245, 197, 0.14));
+        box-shadow: inset 0 0 0 1px rgba(122, 168, 255, 0.24);
+        color: #ffffff;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: all 680ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes sweep {
+        0%,
+        100% {
+          left: -45%;
+        }
+        50% {
+          left: 120%;
+        }
+      }
+    </style>
+  </head>
+  <body class="font-body text-slate-100 antialiased">
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+      <div class="loading-sketch" role="status" aria-label="Loading page content">
+        <div class="sketch-row">
+          <div class="sketch-block sketch-pill"></div>
+        </div>
+        <div class="sketch-row">
+          <div class="sketch-block sketch-title"></div>
+        </div>
+        <div class="sketch-row">
+          <div class="sketch-block sketch-sub"></div>
+        </div>
+        <div class="sketch-row">
+          <div class="sketch-block sketch-card"></div>
+          <div class="sketch-block sketch-card"></div>
+          <div class="sketch-block sketch-card"></div>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="particle-canvas" class="fixed inset-0 -z-10"></canvas>
+
+    <header class="soft-frame sticky top-4 z-30 mx-auto mt-4 flex w-[min(1100px,calc(100%-1.5rem))] items-center justify-between rounded-full glass px-4 py-2 shadow-glow">
+      <a class="flex items-center gap-2 text-sm font-semibold text-white/90" href="#top">
+        <iconify-icon icon="solar:planet-bold" class="text-neon"></iconify-icon>
+        Martin Wang (Meimin Wang)
+      </a>
+      <nav class="hidden items-center gap-2 text-xs md:flex">
+        <a class="nav-pill rounded-full px-3 py-1.5 text-white/80" href="#basic-info">Basic Info</a>
+        <a class="nav-pill rounded-full px-3 py-1.5 text-white/80" href="#education">Education</a>
+        <a class="nav-pill rounded-full px-3 py-1.5 text-white/80" href="#career">Career</a>
+        <a class="nav-pill rounded-full px-3 py-1.5 text-white/80" href="#hobbies">Hobbies</a>
+        <a class="nav-pill rounded-full px-3 py-1.5 text-white/80" href="#projects">Projects</a>
+      </nav>
+      <a href="mailto:blessedwmm@gmail.com" class="btn-soft btn-soft-neon rounded-full px-3 py-1.5 text-xs font-bold text-white">
+        Contact
+      </a>
+    </header>
+
+    <main id="top" class="mx-auto w-[min(1100px,calc(100%-1.5rem))] pb-16 pt-10">
+      <section class="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+        <div class="space-y-5">
+          <p class="inline-flex items-center gap-2 rounded-full border border-starlight/30 bg-starlight/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-starlight">
+            <iconify-icon icon="fluent:sparkle-16-filled"></iconify-icon>
+            Personal Universe
+          </p>
+          <h1 class="font-display text-4xl font-extrabold leading-tight md:text-6xl">
+            Martin Wang <span class="align-middle text-2xl font-semibold text-white/80 md:text-3xl">(Meimin Wang)</span>
+            <span class="mt-2 block text-2xl font-semibold text-white/75 md:text-3xl">Engineer, Builder, Explorer</span>
+          </h1>
+          <p class="max-w-2xl text-base text-white/70 md:text-lg">
+            A software engineer shaping scalable systems and creative product experiences. I care about
+            architecture, execution quality, and solutions that stay elegant as they grow.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#projects" class="shine btn-soft btn-soft-neon rounded-xl px-4 py-2 text-sm font-semibold text-white">View Contributions</a>
+            <a href="#hobbies" class="btn-soft btn-soft-starlight rounded-xl px-4 py-2 text-sm font-semibold text-white">Life Outside Work</a>
+          </div>
+          <div class="flex flex-wrap gap-5 pt-2 text-sm text-white/75">
+            <p class="inline-flex items-center gap-2"><iconify-icon icon="solar:calendar-bold-duotone" class="text-lava"></iconify-icon>Born: 1996-03</p>
+            <p class="inline-flex items-center gap-2"><iconify-icon icon="solar:global-bold-duotone" class="text-neon"></iconify-icon>Focus: AI, Web Apps, Blockchain</p>
+            <p class="inline-flex items-center gap-2"><iconify-icon icon="solar:cup-star-bold-duotone" class="text-starlight"></iconify-icon>Productive by design</p>
+          </div>
+        </div>
+
+        <div class="soft-frame glass rounded-3xl p-6 shadow-glow">
+          <div class="mx-auto h-44 w-44 overflow-hidden rounded-full border-4 border-neon/40 shadow-[0_0_40px_rgba(52,245,197,0.25)]">
+            <img src="assets/avatar.JPG" alt="Portrait of Martin Wang" class="h-full w-full object-cover" />
+          </div>
+          <div class="mt-5 grid grid-cols-3 gap-3 text-center text-xs">
+            <div class="soft-card rounded-xl bg-white/5 p-3">
+              <p class="text-xl font-extrabold text-neon">8+</p>
+              <p class="mt-1 text-white/65">Years in Tech</p>
+            </div>
+            <div class="soft-card rounded-xl bg-white/5 p-3">
+              <p class="text-xl font-extrabold text-lava">30+</p>
+              <p class="mt-1 text-white/65">Projects</p>
+            </div>
+            <div class="soft-card rounded-xl bg-white/5 p-3">
+              <p class="text-xl font-extrabold text-starlight">∞</p>
+              <p class="mt-1 text-white/65">Curiosity</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="basic-info" class="reveal soft-frame mt-16 rounded-3xl glass p-6 md:p-8">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-starlight/30 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.16em] text-white/75">
+          <iconify-icon icon="solar:user-id-bold-duotone" class="text-neon"></iconify-icon>
+          Basic Information
+        </div>
+        <div class="soft-card-strong rounded-2xl bg-black/20">
+          <div class="grid gap-3 p-4 text-sm md:p-5 lg:grid-cols-12">
+            <div class="space-y-3 lg:col-span-7">
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="soft-card rounded-xl bg-white/5 px-3 py-3 text-white/85">
+                  <p class="inline-flex items-center gap-2 text-xs text-starlight"><iconify-icon icon="solar:user-circle-bold-duotone"></iconify-icon>Identity</p>
+                  <p class="mt-1 font-medium">Martin Wang (Meimin Wang)</p>
+                  <p class="mt-1 text-white/70">Software Engineer / Technical Builder</p>
+                </div>
+                <div class="soft-card rounded-xl bg-white/5 px-3 py-3 text-white/85">
+                  <p class="inline-flex items-center gap-2 text-xs text-lava"><iconify-icon icon="solar:global-bold-duotone"></iconify-icon>Focus Areas</p>
+                  <p class="mt-1 text-white/80">AI, Web Application Development, Blockchain Technology</p>
+                </div>
+              </div>
+
+              <div class="grid gap-3 sm:grid-cols-3">
+                <div class="soft-card rounded-xl bg-white/5 px-3 py-2.5 text-white/85">
+                  <p class="inline-flex items-center gap-2 text-xs text-lava"><iconify-icon icon="solar:calendar-bold-duotone"></iconify-icon>Birth</p>
+                  <p class="mt-1">1996-03</p>
+                </div>
+                <div class="soft-card rounded-xl bg-white/5 px-3 py-2.5 text-white/85">
+                  <p class="inline-flex items-center gap-2 text-xs text-neon"><iconify-icon icon="solar:phone-bold-duotone"></iconify-icon>Phone</p>
+                  <p class="mt-1">+86 15850720606</p>
+                </div>
+                <div class="soft-card rounded-xl bg-white/5 px-3 py-2.5 text-white/85">
+                  <p class="inline-flex items-center gap-2 text-xs text-starlight"><iconify-icon icon="solar:translation-bold-duotone"></iconify-icon>Languages</p>
+                  <p class="mt-1">English, Chinese</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-3 lg:col-span-5">
+              <div>
+                <p class="mb-2 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/70"><iconify-icon icon="solar:letter-bold-duotone" class="text-neon"></iconify-icon>Work Emails</p>
+                <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                  <a href="mailto:martin.wang@batechworks.com" class="btn-soft btn-soft-neon min-w-0 rounded-xl p-3 text-left">
+                    <span class="inline-flex items-center gap-2 text-xs font-semibold text-neon">
+                      <iconify-icon icon="mdi:email-fast-outline"></iconify-icon>
+                      BATW
+                    </span>
+                    <span class="mt-1 block break-all text-xs leading-snug text-white/90">martin.wang@batechworks.com</span>
+                  </a>
+                  <a href="mailto:Martin.Wang@batw.bmwgroup.com" class="btn-soft btn-soft-starlight min-w-0 rounded-xl p-3 text-left">
+                    <span class="inline-flex items-center gap-2 text-xs font-semibold text-starlight">
+                      <iconify-icon icon="mdi:email-fast-outline"></iconify-icon>
+                      BMW
+                    </span>
+                    <span class="mt-1 block break-all text-xs leading-snug text-white/90">Martin.Wang@batw.bmwgroup.com</span>
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <p class="mb-2 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/70"><iconify-icon icon="solar:link-bold-duotone" class="text-starlight"></iconify-icon>Profiles</p>
+                <div class="grid gap-2 sm:grid-cols-2">
+                  <a href="mailto:blessedwmm@gmail.com" class="btn-soft btn-soft-neon inline-flex items-center justify-center gap-2 rounded-lg px-3 py-1.5 text-xs font-semibold text-neon">
+                    <iconify-icon icon="mdi:email-outline"></iconify-icon>
+                    Personal Email
+                  </a>
+                  <a href="https://scholar.google.com/citations?user=Qh1ynLgAAAAJ&hl=zh-CN" target="_blank" rel="noreferrer" class="btn-soft btn-soft-starlight inline-flex items-center justify-center gap-2 rounded-lg px-3 py-1.5 text-xs font-semibold text-starlight"><iconify-icon icon="mdi:school-outline"></iconify-icon>Google Scholar</a>
+                  <a href="https://github.com/Martin-WMM" target="_blank" rel="noreferrer" class="btn-soft btn-soft-neon inline-flex items-center justify-center gap-2 rounded-lg px-3 py-1.5 text-xs font-semibold text-neon">
+                    <iconify-icon icon="mdi:github"></iconify-icon>
+                    Public GitHub
+                  </a>
+                  <a href="https://atc-github.azure.cloud.bmw/qxz72if" target="_blank" rel="noreferrer" class="btn-soft btn-soft-lava inline-flex items-center justify-center gap-2 rounded-lg px-3 py-1.5 text-xs font-semibold text-lava">
+                    <iconify-icon icon="mdi:source-repository"></iconify-icon>
+                    BMW ATC GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="education" class="reveal soft-frame glass section-shell mt-16">
+        <div class="mb-5 flex items-center gap-3">
+          <iconify-icon icon="solar:book-bold-duotone" class="text-2xl text-starlight"></iconify-icon>
+          <h2 class="font-display text-3xl font-bold">Education</h2>
+        </div>
+        <div class="space-y-4">
+          <article class="soft-card card-accent-starlight panel-surface rounded-2xl p-5">
+            <p class="text-xs uppercase tracking-[0.16em] text-starlight">2015-2022</p>
+            <h3 class="mt-1 text-xl font-bold">B.Sc. and M.Sc. at Nanjing University of Information Science & Technology</h3>
+            <p class="mt-1 text-white/70">Completed both undergraduate and graduate studies with a strong focus on software engineering, mathematics, and applied research.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="career" class="reveal soft-frame glass section-shell mt-16">
+        <div class="mb-5 flex items-center gap-3">
+          <iconify-icon icon="solar:case-round-bold-duotone" class="text-2xl text-lava"></iconify-icon>
+          <h2 class="font-display text-3xl font-bold">Career Experience</h2>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          <article class="soft-card panel-surface rounded-2xl p-5">
+            <p class="inline-flex items-center gap-2 text-sm text-neon"><iconify-icon icon="solar:calendar-mark-bold-duotone"></iconify-icon>2022-03 to 2026-03</p>
+            <h3 class="mt-2 text-xl font-bold">Nanjing Yunchuang Big Data Technology Co., Ltd.</h3>
+            <p class="mt-2 text-sm text-white/70">AI Department - Algorithm Engineer, Technical Expert.</p>
+          </article>
+          <article class="soft-card panel-surface rounded-2xl p-5">
+            <p class="inline-flex items-center gap-2 text-sm text-starlight"><iconify-icon icon="solar:calendar-mark-bold-duotone"></iconify-icon>2026-03 to Present</p>
+            <h3 class="mt-2 text-xl font-bold">BMW Archermind Technology Co., Ltd. (BA TechWorks)</h3>
+            <p class="mt-2 text-sm text-white/70">Flamingo Team - AI Dev.</p>
+          </article>
+        </div>
+        <article class="soft-card card-accent-lava panel-surface mt-4 rounded-2xl p-5">
+          <p class="inline-flex items-center gap-2 text-sm text-lava"><iconify-icon icon="solar:city-bold-duotone"></iconify-icon>Hometown</p>
+          <h3 class="mt-1 text-xl font-bold">Dafeng District, Yancheng, Jiangsu Province</h3>
+          <p class="mt-2 text-sm text-white/75">
+            My hometown, Dafeng in Yancheng, is known for its open coastal landscape, gentle rhythm of life, and warm community spirit.
+            It shaped my practical mindset, patience in long-term work, and appreciation for steady growth with strong roots.
+          </p>
+          <div class="mt-4 grid gap-3 sm:grid-cols-2">
+            <figure class="soft-card overflow-hidden rounded-xl bg-black/20">
+              <img src="assets/hometown/hometown-1.jpeg" alt="Hometown view in Dafeng, Yancheng" class="h-44 w-full object-cover" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="soft-card overflow-hidden rounded-xl bg-black/20">
+              <img src="assets/hometown/hometown-2.jpeg" alt="Scenery from Dafeng District, Jiangsu" class="h-44 w-full object-cover" loading="lazy" decoding="async" />
+            </figure>
+          </div>
+        </article>
+      </section>
+
+      <section id="hobbies" class="reveal soft-frame glass section-shell mt-16">
+        <div class="mb-5 flex items-center gap-3">
+          <iconify-icon icon="solar:camera-bold-duotone" class="text-2xl text-neon"></iconify-icon>
+          <h2 class="font-display text-3xl font-bold">Hobbies & Photo Wall</h2>
+        </div>
+        <div class="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <article class="soft-card panel-surface rounded-2xl p-5">
+            <ul class="space-y-3 text-sm text-white/75">
+              <li class="flex items-start gap-2"><iconify-icon icon="solar:book-bookmark-bold-duotone" class="mt-0.5 text-lava"></iconify-icon><span>Reading literature, especially classics such as <em>Dream of the Red Chamber</em>.</span></li>
+              <li class="flex items-start gap-2"><iconify-icon icon="solar:sigma-bold-duotone" class="mt-0.5 text-starlight"></iconify-icon><span>Exploring mathematics through books on mathematical analysis, algebra, stochastic processes, and optimization theory.</span></li>
+              <li class="flex items-start gap-2"><iconify-icon icon="solar:pen-bold-duotone" class="mt-0.5 text-neon"></iconify-icon><span>Writing reflective notes and summaries from daily reading and learning.</span></li>
+              <li class="flex items-start gap-2"><iconify-icon icon="solar:campfire-bold-duotone" class="mt-0.5 text-lava"></iconify-icon><span>Camping and enjoying quiet outdoor time.</span></li>
+            </ul>
+          </article>
+          <div class="soft-card panel-surface rounded-2xl border border-dashed border-starlight/35 p-6 text-center">
+            <iconify-icon icon="solar:gallery-wide-bold-duotone" class="text-5xl text-starlight"></iconify-icon>
+            <p class="mt-3 text-sm font-semibold text-white/85">Photo Wall Is Temporarily Empty</p>
+            <p class="mt-1 text-sm text-white/60">New photos will be added here soon.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="reveal soft-frame mt-16 rounded-3xl glass p-6 md:p-8">
+        <div class="mb-5 flex items-center gap-3">
+          <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="text-2xl text-lava"></iconify-icon>
+          <h2 class="font-display text-3xl font-bold">Projects, Contributions & Sharing</h2>
+        </div>
+        <div class="grid gap-4 md:grid-cols-3">
+          <article class="soft-card rounded-2xl bg-black/20 p-5">
+            <p class="text-xs uppercase tracking-[0.16em] text-neon">Project</p>
+            <h3 class="mt-1 text-lg font-bold">AI-Driven Engineering Productivity</h3>
+            <p class="mt-2 text-sm text-white/70">Building practical AI-assisted workflows for better code quality, team velocity, and maintainability.</p>
+          </article>
+          <article class="soft-card rounded-2xl bg-black/20 p-5">
+            <p class="text-xs uppercase tracking-[0.16em] text-starlight">Contribution</p>
+            <h3 class="mt-1 text-lg font-bold">Web Application and Platform Standards</h3>
+            <p class="mt-2 text-sm text-white/70">Defining frontend architecture standards and development practices for robust web applications.</p>
+          </article>
+          <article class="soft-card rounded-2xl bg-black/20 p-5">
+            <p class="text-xs uppercase tracking-[0.16em] text-lava">Sharing</p>
+            <h3 class="mt-1 text-lg font-bold">Research and Knowledge Sharing</h3>
+            <p class="mt-2 text-sm text-white/70">Sharing technical notes, reflections, and academic references across AI, Web development, and blockchain topics.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="soft-frame mx-auto mb-8 mt-8 w-[min(1100px,calc(100%-1.5rem))] rounded-2xl bg-white/5 px-5 py-4 text-sm text-white/60">
+      <p class="flex items-center gap-2"><iconify-icon icon="solar:code-circle-bold-duotone" class="text-neon"></iconify-icon>© <span id="year"></span> Martin Wang. Crafted with Tailwind CSS, Iconify, and GitHub Pages.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
