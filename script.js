@@ -10,6 +10,20 @@ const hideLoadingOverlay = () => {
   loadingOverlay.classList.add('hidden');
 };
 
+const renderLatexFormula = () => {
+  if (typeof window.renderMathInElement !== 'function') {
+    return;
+  }
+
+  window.renderMathInElement(document.body, {
+    delimiters: [
+      { left: '$$', right: '$$', display: true },
+      { left: '$', right: '$', display: false },
+    ],
+    throwOnError: false,
+  });
+};
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', hideLoadingOverlay, { once: true });
 } else {
@@ -17,6 +31,7 @@ if (document.readyState === 'loading') {
 }
 
 window.addEventListener('load', hideLoadingOverlay, { once: true });
+window.addEventListener('load', renderLatexFormula, { once: true });
 
 if (yearNode) {
   yearNode.textContent = String(new Date().getFullYear());
